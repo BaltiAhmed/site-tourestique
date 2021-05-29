@@ -7,6 +7,7 @@ import ListEvenement from "./pages/liste-evenement";
 import Login from "./pages/login";
 import AjouEvenement from "./pages/ajout-evenement";
 import NavBar from "./components/nav-bar";
+import Signup from "./pages/signup";
 
 function App() {
   const { user, token, login, logout } = UserAuth();
@@ -23,6 +24,7 @@ function App() {
     routes = (
       <React.Fragment>
         <Route path="/" exact component={Login} />
+        <Route path="/signup"  component={Signup} />
       </React.Fragment>
     );
   }
