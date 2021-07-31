@@ -3,11 +3,12 @@ import { Route, BrowserRouter } from "react-router-dom";
 import NavLogin from "./components/nav-login";
 import { Authcontext } from "./context/auth-context";
 import { UserAuth } from "./hooks/Auth-houks";
-import ListEvenement from "./pages/liste-evenement";
+import ListEvenement from "./pages/evenement/liste-evenement";
 import Login from "./pages/login";
-import AjouEvenement from "./pages/ajout-evenement";
+import AjouEvenement from "./pages/evenement/ajout-evenement";
 import NavBar from "./components/nav-bar";
 import Signup from "./pages/signup";
+import UpdateEvenement from "./pages/evenement/update-evenement";
 
 function App() {
   const { user, token, login, logout } = UserAuth();
@@ -18,6 +19,7 @@ function App() {
       <React.Fragment>
         <Route path="/" exact component={ListEvenement} />
         <Route path="/ajout-evenement" component={AjouEvenement} />
+        <Route path="/update-evenement/:id" component={UpdateEvenement} />
       </React.Fragment>
     );
   } else {

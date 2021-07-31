@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
-import ErrorModel from "../models/error-models";
-import SuccessModel from "../models/success-models";
+import ErrorModel from "../../models/error-models";
+import SuccessModel from "../../models/success-models";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import {Authcontext} from '../../context/auth-context'
+import {useParams} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AjouEvenement = (props) => {
+const UpdateEvenement = (props) => {
   const classes = useStyles();
 
   const [File, setFile] = useState();
@@ -59,9 +61,9 @@ const AjouEvenement = (props) => {
   };
 
   const [nom, setNom] = useState();
-  const [stock, setStock] = useState();
-  const [categorie, setCategorie] = useState();
-  const [ref, setRef] = useState();
+  const [type, setType] = useState();
+  const [dateDebut, setDateDebut] = useState();
+  const [dateFin, SetDateFin] = useState();
   const [description, setDescription] = useState();
   const [error, seterror] = useState(false);
   const [success, setsuccess] = useState(false);
@@ -69,41 +71,39 @@ const AjouEvenement = (props) => {
   const onchange = (e) => {
     if (e.target.name === "nom") {
       setNom(e.target.value);
-    } else if (e.target.name === "stock") {
-      setStock(e.target.value);
-    } else if (e.target.name === "categorie") {
-      setCategorie(e.target.value);
-    } else if (e.target.name === "ref") {
-      setRef(e.target.value);
+    } else if (e.target.name === "type") {
+      setType(e.target.value);
+    } else if (e.target.name === "dateDebut") {
+      setDateDebut(e.target.value);
+    } else if (e.target.name === "dateFin") {
+      SetDateFin(e.target.value);
     } else if (e.target.name === "description") {
       setDescription(e.target.value);
     }
   };
 
+  const auth = useContext(Authcontext)
+  const id =useParams().id
+
   const submit = async (e) => {
     e.preventDefault();
+    try {
+      const formData = new FormData();
 
-    if (ref.includes("619", 0)) {
-      try {
-        const formData = new FormData();
+      formData.append("image", File);
+      formData.append("titre", nom);
+      formData.append("type", type);
+      formData.append("Ddebut", dateDebut);
+      formData.append("Dfin", dateFin);
+      formData.append("description", description);
+      formData.append("IdUser", auth.user._id);
 
-        formData.append("image", File);
-        formData.append("nom", nom);
-        formData.append("description", description);
-        formData.append("stocke", stock);
-        formData.append("categorie", categorie);
-        formData.append("ref", ref);
+      await axios.patch(`http://localhost:5000/api/evenement/${id}`, formData);
 
-        await axios.post(`http://localhost:5000/api/article/ajout`, formData);
-
-        setsuccess("produit ajouté avec succée");
-        seterror(null);
-      } catch (err) {
-        seterror(err.message || "il y a un probleme");
-        setsuccess(null);
-      }
-    } else {
-      seterror("le produit doit ètre tunisien");
+      setsuccess("evenement modifié avec succée");
+      seterror(null);
+    } catch (err) {
+      seterror(err.message || "il y a un probleme");
       setsuccess(null);
     }
   };
@@ -167,7 +167,7 @@ const AjouEvenement = (props) => {
                   <Form.Label>type</Form.Label>
                   <Form.Control
                     as="select"
-                    name="categorie"
+                    name="type"
                     onChange={onchange}
                     required
                   >
@@ -186,10 +186,13 @@ const AjouEvenement = (props) => {
                   label="Date debut"
                   type="datetime-local"
                   defaultValue="2017-05-24T10:30"
+                  name="dateDebut"
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={onchange}
+                  required
                 />
 
                 <TextField
@@ -201,6 +204,9 @@ const AjouEvenement = (props) => {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  name="dateFin"
+                  onChange={onchange}
+                  required
                 />
               </Form.Row>
 
@@ -211,6 +217,7 @@ const AjouEvenement = (props) => {
                   rows={5}
                   name="description"
                   onChange={onchange}
+                  required
                 />
               </Form.Group>
 
@@ -225,4 +232,4 @@ const AjouEvenement = (props) => {
     </div>
   );
 };
-export default AjouEvenement;
+export default UpdateEvenement;
