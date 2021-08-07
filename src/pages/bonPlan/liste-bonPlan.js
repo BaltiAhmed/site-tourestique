@@ -16,7 +16,6 @@ import SuccessModel from "../../models/success-models";
 import { Link } from "react-router-dom";
 import AjoutBTN from "../../components/btnAjout";
 import {Authcontext} from  '../../context/auth-context'
-import {Image} from 'react-bootstrap'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -42,7 +41,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ListEvenement() {
+export default function ListBonPlan() {
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
@@ -65,14 +64,14 @@ export default function ListEvenement() {
   useEffect(() => {
     const sendRequest = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/evenement/site/${auth.user._id}`);
+        const response = await fetch(`http://localhost:5000/api/bonplan/site/${auth.user._id}`);
 
         const responseData = await response.json();
         if (!response.ok) {
           throw new Error(responseData.message);
         }
 
-        setList(responseData.evenement);
+        setList(responseData.bonPlan);
       } catch (err) {
         seterror(err.message);
       }
@@ -80,6 +79,7 @@ export default function ListEvenement() {
 
     sendRequest();
   }, []);
+  
 
   return (
     <Container>
@@ -88,7 +88,7 @@ export default function ListEvenement() {
         <Col xs={10}>
           <ErrorModel error={error} />
           <SuccessModel success={success} />
-          <Link to="/ajout-evenement" >
+          <Link to="/ajout-BonPlan" >
           <AjoutBTN title="Ajouter un service"/>
           </Link>
           
@@ -96,7 +96,7 @@ export default function ListEvenement() {
             <Table className={classes.table} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>Image</StyledTableCell>
+                  
                   <StyledTableCell align="right">Titre</StyledTableCell>
                   <StyledTableCell align="right">Date de début</StyledTableCell>
                   <StyledTableCell align="right">Date de fin</StyledTableCell>
@@ -111,9 +111,6 @@ export default function ListEvenement() {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => (
                       <StyledTableRow key={row.name}>
-                        <StyledTableCell component="th" scope="row">
-                          <Image src={`http://localhost:5000/${row.photo}`} style={{width:60,height:50}} ></Image>
-                        </StyledTableCell>
                         <StyledTableCell align="right">
                           {row.titre}
                         </StyledTableCell>
@@ -130,7 +127,7 @@ export default function ListEvenement() {
                           {row.description}
                         </StyledTableCell>
                         <StyledTableCell align="right">
-                          <Link to={`/update-evenement/${row._id}`}>
+                          <Link to={`/update-BonPlan/${row._id}`}>
                             <UpdateIcon style={{ color: "green" }} />
                           </Link>
                           <DeleteForeverIcon
@@ -138,7 +135,7 @@ export default function ListEvenement() {
                             onClick={async (event) => {
                               try {
                                 let response = await fetch(
-                                  `http://localhost:5000/api/evenement/${row._id}`,
+                                  `http://localhost:5000/api/bonplan/${row._id}`,
                                   {
                                     method: "DELETE",
                                     headers: {
@@ -153,7 +150,7 @@ export default function ListEvenement() {
                                 setList(
                                   list.filter((el) => el._id !== row._id)
                                 );
-                                setsuccess("Evenement bien suprimer");
+                                setsuccess("BonPlan bien suprimer");
                               } catch (err) {
                                 console.log(err);
                                 seterror(err.message || "il y a un probleme");

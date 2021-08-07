@@ -9,6 +9,9 @@ import AjouEvenement from "./pages/evenement/ajout-evenement";
 import NavBar from "./components/nav-bar";
 import Signup from "./pages/signup";
 import UpdateEvenement from "./pages/evenement/update-evenement";
+import ListBonPlan from "./pages/bonPlan/liste-bonPlan";
+import AjoutBonPlan from "./pages/bonPlan/ajout-bonPlan";
+import UpdateBonPlan from "./pages/bonPlan/update-bonPlan";
 
 function App() {
   const { user, token, login, logout } = UserAuth();
@@ -20,6 +23,9 @@ function App() {
         <Route path="/" exact component={ListEvenement} />
         <Route path="/ajout-evenement" component={AjouEvenement} />
         <Route path="/update-evenement/:id" component={UpdateEvenement} />
+        <Route path="/liste-BonPlan" component={ListBonPlan} />
+        <Route path="/ajout-BonPlan" component={AjoutBonPlan} />
+        <Route path="/update-BonPlan/:id" component={UpdateBonPlan} />
       </React.Fragment>
     );
   } else {

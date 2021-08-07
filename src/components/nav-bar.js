@@ -144,6 +144,15 @@ export default function NavBar(props) {
               <ListItemText primary="Mes evenement" />
             </ListItem>
           </Link>
+          <Link to="/liste-BonPlan" style={{textDecoration:'none',color:"black"}}>
+            <ListItem button key="Liste produit">
+              <ListItemIcon>
+                {" "}
+                <FormatListBulletedIcon style={{ color: "#039be5" }} />
+              </ListItemIcon>
+              <ListItemText primary="Mes Bon Plan" />
+            </ListItem>
+          </Link>
         </List>
         <Divider />
       </Drawer>
