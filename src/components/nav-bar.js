@@ -18,6 +18,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import { Link } from "react-router-dom";
+import SimpleMenu from "./NavBarMenu";
+
 
 const drawerWidth = 240;
 
@@ -113,6 +115,7 @@ export default function NavBar(props) {
           <Typography variant="h6" noWrap>
             Site Tourestique
           </Typography>
+          <SimpleMenu />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -151,6 +154,15 @@ export default function NavBar(props) {
                 <FormatListBulletedIcon style={{ color: "#039be5" }} />
               </ListItemIcon>
               <ListItemText primary="Mes Bon Plan" />
+            </ListItem>
+          </Link>
+          <Link to="/liste-transport" style={{textDecoration:'none',color:"black"}}>
+            <ListItem button key="">
+              <ListItemIcon>
+                {" "}
+                <FormatListBulletedIcon style={{ color: "#039be5" }} />
+              </ListItemIcon>
+              <ListItemText primary="Accées aux site" />
             </ListItem>
           </Link>
         </List>
