@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Card, Form } from "react-bootstrap";
 import ErrorModel from "../models/error-models";
 import SuccessModel from "../models/success-models";
 import { Authcontext } from "../context/auth-context";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState();
@@ -37,7 +37,7 @@ const Login = () => {
       });
       let responsedata = await response.json();
       if (!response.ok) {
-        seterror(responsedata.message)
+        seterror(responsedata.message);
         throw new Error(responsedata.message);
       }
 
@@ -91,12 +91,7 @@ const Login = () => {
                   </Button>
                 </Form>
               </Card.Body>
-              <Card.Footer className="text-muted">
-                <Link to="/signup">
-                <Button variant="outline-primary">Crée mon compte</Button>
-                </Link>
-              
-              </Card.Footer>
+              <Card.Footer className="text-muted"></Card.Footer>
             </Card>
           </Col>
           <Col></Col>
