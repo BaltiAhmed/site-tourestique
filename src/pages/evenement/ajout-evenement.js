@@ -6,6 +6,7 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import {Authcontext} from '../../context/auth-context'
+import {useParams} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -82,6 +83,7 @@ const AjouEvenement = (props) => {
   };
 
   const auth = useContext(Authcontext)
+  const id = useParams().id
 
   const submit = async (e) => {
     e.preventDefault();
@@ -94,7 +96,7 @@ const AjouEvenement = (props) => {
       formData.append("Ddebut", dateDebut);
       formData.append("Dfin", dateFin);
       formData.append("description", description);
-      formData.append("IdUser", auth.user._id);
+      formData.append("IdUser", id);
 
       await axios.post(`http://localhost:5000/api/evenement/ajout`, formData);
 

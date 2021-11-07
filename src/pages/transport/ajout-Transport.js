@@ -6,6 +6,7 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { Authcontext } from "../../context/auth-context";
+import {useParams} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,6 +43,7 @@ const AjoutTransport = (props) => {
   };
 
   const auth = useContext(Authcontext);
+  const id = useParams().id
 
   const submit = async (e) => {
     e.preventDefault();
@@ -56,7 +58,7 @@ const AjoutTransport = (props) => {
           prix: prix,
           depart: depart,
           temps: temps,
-          idSite:auth.user._id
+          idSite:id
         }),
       });
       let responsedata = await response.json();

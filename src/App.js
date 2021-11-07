@@ -16,6 +16,8 @@ import ListeTransports from "./pages/transport/liste-transport";
 import AjoutTransport from "./pages/transport/ajout-Transport";
 import UpdateTransport from "./pages/transport/updateTransport";
 import Profile from "./pages/profile/profile";
+import image from "./images/image.jpg";
+import ListSite from "./pages/site/list";
 
 function App() {
   const { user, token, login, logout } = UserAuth();
@@ -24,33 +26,48 @@ function App() {
   if (token) {
     routes = (
       <React.Fragment>
-        <Route path="/" exact component={ListEvenement} />
-        <Route path="/ajout-evenement" component={AjouEvenement} />
+        <Route path="/evenements/:id" exact component={ListEvenement} />
+        <Route path="/ajout-evenement/:id" component={AjouEvenement} />
         <Route path="/update-evenement/:id" component={UpdateEvenement} />
-        <Route path="/liste-BonPlan" component={ListBonPlan} />
-        <Route path="/ajout-BonPlan" component={AjoutBonPlan} />
+        <Route path="/liste-BonPlan/:id" component={ListBonPlan} />
+        <Route path="/ajout-BonPlan/:id" component={AjoutBonPlan} />
         <Route path="/update-BonPlan/:id" component={UpdateBonPlan} />
-        <Route path="/liste-transport" component={ListeTransports} />
-        <Route path="/ajout-transport" component={AjoutTransport} />
+        <Route path="/liste-transport/:id" component={ListeTransports} />
+        <Route path="/ajout-transport/:id" component={AjoutTransport} />
         <Route path="/update-transport/:id" component={UpdateTransport} />
         <Route path="/update-profile" component={Profile} />
+        <Route path="/" exact component={ListSite} />
       </React.Fragment>
     );
   } else {
     routes = (
       <React.Fragment>
         <Route path="/" exact component={Login} />
-        <Route path="/signup"  component={Signup} />
+        <Route path="/signup" component={Signup} />
       </React.Fragment>
     );
   }
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: "url(" + image + ")",
+        backgroundSize: "cover",
+        /* backgroundRepeat: "no-repeat", */
+        position: "absolute",
+        //height: "100vh",
+        width: "100%",
+        backgroundPosition: "center",
+        backgroundRepeat: "repeat-y",
+        top: "0px",
+        bottom: "0px",
+        height: "fit-content",
+      }}
+    >
       <Authcontext.Provider
         value={{ user: user, token: token, login: login, logout: logout }}
       >
         <BrowserRouter>
-          {!token ? <NavLogin /> : <NavBar /> }
+          {!token ? <NavLogin /> : <NavBar />}
           {routes}
         </BrowserRouter>
       </Authcontext.Provider>

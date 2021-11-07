@@ -48,7 +48,7 @@ export default function SimpleMenu() {
         color="inherit"
       >
         <div className={classes.root}>
-          <Avatar alt="Remy Sharp" src={`http://localhost:5000/${auth.user.photo}`} />
+          <Avatar alt="Remy Sharp" src={``} />
         </div>
       </IconButton>
       <Menu
@@ -66,12 +66,7 @@ export default function SimpleMenu() {
         open={open}
         onClose={handleClose}
       >
-        <Link
-          to="/update-profile"
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-        </Link>
+        
 
         <MenuItem
           onClick={() => {

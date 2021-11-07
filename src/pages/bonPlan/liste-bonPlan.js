@@ -16,6 +16,7 @@ import SuccessModel from "../../models/success-models";
 import { Link } from "react-router-dom";
 import AjoutBTN from "../../components/btnAjout";
 import {Authcontext} from  '../../context/auth-context'
+import {useParams} from 'react-router-dom'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -60,11 +61,12 @@ export default function ListBonPlan() {
   const [success, setsuccess] = useState(null);
 
   const auth = useContext(Authcontext)
+  const id = useParams().id
 
   useEffect(() => {
     const sendRequest = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/bonplan/site/${auth.user._id}`);
+        const response = await fetch(`http://localhost:5000/api/bonplan/site/${id}`);
 
         const responseData = await response.json();
         if (!response.ok) {
@@ -88,7 +90,7 @@ export default function ListBonPlan() {
         <Col xs={10}>
           <ErrorModel error={error} />
           <SuccessModel success={success} />
-          <Link to="/ajout-BonPlan" >
+          <Link to={`/ajout-BonPlan/${id}`} >
           <AjoutBTN title="Ajouter un service"/>
           </Link>
           

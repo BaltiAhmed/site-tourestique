@@ -6,6 +6,7 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import {Authcontext} from '../../context/auth-context'
+import {useParams} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -45,6 +46,7 @@ const AjoutBonPlan = (props) => {
   };
 
   const auth = useContext(Authcontext)
+  const id = useParams().id
 
   const submit = async (e) => {
     e.preventDefault();
@@ -60,7 +62,7 @@ const AjoutBonPlan = (props) => {
             description: description,
             Ddebut: dateDebut,
             Dfin: dateFin,
-            IdUser:auth.user._id
+            IdUser:id
           }),
         });
         let responsedata = await response.json();

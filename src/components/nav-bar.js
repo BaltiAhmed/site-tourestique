@@ -20,7 +20,6 @@ import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import { Link } from "react-router-dom";
 import SimpleMenu from "./NavBarMenu";
 
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -138,7 +137,19 @@ export default function NavBar(props) {
         </div>
         <Divider />
         <List>
-          <Link to="/" style={{textDecoration:'none',color:"black"}}>
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+            <ListItem button key="Liste produit">
+              <ListItemIcon>
+                {" "}
+                <FormatListBulletedIcon style={{ color: "#039be5" }} />
+              </ListItemIcon>
+              <ListItemText primary="Sites tourestiques" />
+            </ListItem>
+          </Link>
+          <Link
+            to="/"
+            style={{ textDecoration: "none", color: "black" }}
+          >
             <ListItem button key="Liste produit">
               <ListItemIcon>
                 {" "}
@@ -147,7 +158,10 @@ export default function NavBar(props) {
               <ListItemText primary="Mes evenement" />
             </ListItem>
           </Link>
-          <Link to="/liste-BonPlan" style={{textDecoration:'none',color:"black"}}>
+          <Link
+            to="/"
+            style={{ textDecoration: "none", color: "black" }}
+          >
             <ListItem button key="Liste produit">
               <ListItemIcon>
                 {" "}
@@ -156,7 +170,10 @@ export default function NavBar(props) {
               <ListItemText primary="Mes Bon Plan" />
             </ListItem>
           </Link>
-          <Link to="/liste-transport" style={{textDecoration:'none',color:"black"}}>
+          <Link
+            to="/"
+            style={{ textDecoration: "none", color: "black" }}
+          >
             <ListItem button key="">
               <ListItemIcon>
                 {" "}
